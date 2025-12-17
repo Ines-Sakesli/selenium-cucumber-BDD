@@ -1,125 +1,169 @@
-<p align="center">
-<img width="350" alt="y" src="https://user-images.githubusercontent.com/62071683/85179170-93982080-b280-11ea-8033-9afe7238c044.jpg">
-</p>
 
-# Selenium - Cucumber Automatisation de test fonctionnel 
+# 🧪 Selenium WebDriver Automation Framework
 
-Selenium-Cucumber est une approche de développement piloté par le comportement (Behavior-Driven Development BDD) pour écrire un script de test d'automatisation pour tester une application Web. 
-Il vous permet d'écrire et d'exécuter des tests d'acceptation / unitaires automatisés. Il est multiplateforme, open source et gratuit. Automatisez vos cas de test avec un codage minimal.
+This project is a **test automation framework** built with:
+- [Selenium WebDriver](https://www.selenium.dev/)
+- [Cucumber](https://cucumber.io/) (BDD)
+- [JUnit](https://junit.org/)
+- **Page Object Model (POM)** design pattern
+- **Factory Design Pattern** for browser management
 
-# Approche
+The goal of this framework is to provide a scalable, maintainable, and easy-to-use structure for end-to-end UI test automation.
 
-Behavior-Driven Development
-(BDD) est une méthode de conception logicielle qui étend TDD, par l’apport de pratiques additionnelles, et qui explore et spécifie les besoins, en mettant l’accent sur la collaboration et en s’appuyant sur les tests et leur scénarisation.
-L'automation des tests fait partie de BDD, au même titre qu'avec TDD, tout en élargissant l'utilisation des tests à tous les niveaux de test.
+---
 
-# Script P.O.M 
+## 🚀 Features
 
-Les scripts Sélénium sont développés par le design pattern POM :
-Une meilleure approche de la maintenance de script consiste à créer un fichier de classe distinct qui trouverait des éléments Web, les remplirait où les vérifierait. Cette classe peut être réutilisée dans tous les scripts utilisant cet élément. S'il y a un changement dans l'élément web, nous devons faire la modification dans seulement 1 fichier de classe.
+- Cross-browser execution (Chrome, Firefox, Edge) via **Factory Pattern**.
+- Test scenarios written in **Gherkin** syntax for readability.
+- Structured with **Page Object Model** for reusability and maintainability.
+- Test execution and reporting with **JUnit**.
+- Easily extendable for additional browsers and environments.
+- Logging support for better traceability.
 
-# Installation (pré-requis)
+---
 
-- JDK 1.8+ (assurez-vous que le chemin d'accès aux classes Java est défini)
-- Maven (assurez-vous que le chemin de classe .m2 est défini)
-- Eclipse
-- Eclipse Plugins pour
-    - Maven
-    - Cucumber
-- Driver du navigateur (Environnement Windows) 
+## 🏗️ Project Structure
 
-# Installation plugin Cucumber
+```
 
-- Ouvrir Eclipse
-- Cliquer sur Help
-- Cliquer Install New Software
-- Cliquer sur le bouton " Add"
-- Taper le nom comme vous le souhaitez, exemple " Cucumber " et taper " http://cucumber.github.io/cucumber-eclipse/update-site " comme emplacement. Cliquer OK
-- Cochez la case ok et appuyez sur le bouton " Suivant "
-- Cliquer sur “I accept the terms of the license agreement” puis cliquer sur Terminer
-- Vous pouvez ou non rencontrer un avertissement de sécurité, si vous cliquez simplement sur OK
-- Redémarrer Eclipse.
+selenium-cucumber-junit-pom-factory
+│── src
+│   ├── main
+│   │   └── java
+│   │       ├── factory
+│   │       │   └── BrowserFactory.java      # Factory Pattern for WebDriver
+│   │       └── pages
+│   │           └── LoginPage.java           # Example Page Object
+│   │
+│   └── test
+│       └── java
+│           ├── stepDefinitions
+│           │   └── LoginSteps.java          # Cucumber step definitions
+│           └── runners
+│               └── TestRunner.java          # JUnit test runner
+│
+│── src/test/resources
+│   ├── features
+│   │   └── login.feature                    # Example Gherkin feature
+│   └── config.properties                    # Config file (browser, baseUrl, etc.)
+│
+│── pom.xml                                  # Maven dependencies
+│── README.md
 
-# Installation du fichier ChromeDriver.exe (Environnement Windows) 
+````
 
-   - Aller dans le site https://chromedriver.chromium.org/downloads   
-   - Télécharger le fichier chromeDriver.exe compatible avec la version du navigateur
-   - Créer un package drivers sous la source folder src/test/resources 
-   - Copier-coller dans le dossier drivers  
-   - Mettre le path du fichier chromeDriver.exe dans la classe src/test/java/utils/Setup.java
- 
-#  Où sont écrits les tests ?
+---
 
-Les tests sont écrits dans le repertoire src/spec/feature avec le syntaxe Gherkin
-- Gherkin utilise un ensemble de mots clés spéciaux pour donner une structure et un sens aux spécifications exécutables. Gherkin permet d’écrire des scénarios de test compréhensibles par des individus non techniques. Cette approche sert deux objectifs : documenter les fonctionnalités à développer d’une part, et permettre l’automatisation des tests d’autre part.La plupart des lignes d'un document Gherkin commencent par l'un des mots clés:
-  - Le “Given” mot-clé précède le texte définissant le contexte; l'état connu du système (ou condition préalable).
-  - Le “When” mot-clé précède le texte définissant une action.
-  - Le “Then” mot-clé précède le texte définissant le résultat de l'action sur le contexte (ou résultat attendu).
-  
-# Tags 
+## ⚙️ Prerequisites
 
-Cucumber a fourni un moyen d'organiser l'exécution des scénarii en utilisant des Tags dans le fichier feature. Nous pouvons définir chaque scénario avec une tag utile. Plus tard, dans le fichier runner, nous pouvons décider quel tag spécifique nous voulons que Cucumber exécute. Le tag commence par « @ ». Après « @ », vous pouvez avoir tout texte pertinent pour définir votre tag comme @SmokeTests juste au-dessus des scénarios que vous souhaitez marquer. 
-Ensuite, pour cibler ces scénarios tagués, spécifiez simplement les noms des tags dans les options CucumberOptions comme tags = {«@SmokeTests»}.
+- **Java 11+**
+- **Maven 3.6+**
+- Browser drivers (e.g. ChromeDriver, GeckoDriver, EdgeDriver)
+- IDE (IntelliJ, Eclipse, or VS Code with Java support)
 
-Le tag ne fonctionne pas uniquement avec les scénarios, il fonctionne également avec les features. Signifie que vous pouvez également taguer vos fichiers features. 
-Toute tag qui existe sur une entité sera héritée par un scénario, un scénario Outline ou des exemples.
-  
-# Exécution des tests avec la classe d'exécution
- 
-La classe d'exécution de test est l'un des nombreux mécanismes à l'aide desquels vous pouvez exécuter le fichier de fonctionnalité Cucumber. 
-La classe d’exécution est sous src/test/java / TestRunnerCucumber.java
+---
 
-- Pour exécuter les cas de test :
-  - Choisir les tags à exécuter dans la source folder src/spec/feautures
-  - Cliquer bouton droit sur la classe TestRunnerCucumber.java
-  - Choisir Run As
-  - Cliquer sur Junit Test
- 
-# Exécuter tous les fichiers feature 
+## 📦 Installation
 
-   - Ouvrir la classe TestRunnerCucumber
-   - Vider les tags (tags= {})
-   - Cliquer bouton droit sur la classe TestRunnerCucumber.java
-   - Choisir Run As
-   - Cliquer sur Junit Test
-   
-# Fichier de configuration 
+Clone the repository:
 
-Le fichier de configuration "Config.properties" de l’url de l’environnement de test, grid, login et mots de passe de test se trouve sous src/test/resources/configs
+```bash
+git clone https://github.com/your-username/selenium-cucumber-junit-pom-factory.git
+cd selenium-cucumber-junit-pom-factory
+````
 
-   - Ouvrir le fichier "Config.properties" sous src/test/resources/configs
-   - Mettre à jour l’URL pour l’environnement à tester dans "home.url"
-   - Mettre à jour l'adresse de la grid en local dans "home.local" 
-   - Mettre à jour le login et le mots de passe dans "home.login" et "home.password"
-   
-# Résultat de test 
- 
-Les résultats de test s’affichent dans un rapport "cucumber-report.html" sous le dossier Target.
+Install dependencies:
 
-# Synthèse Framework de test auto en BDD
+```bash
+mvn clean install
+```
 
-- Approche agile
-  - Approche BDD 
-- Technologies
-  - Cucumber 
-    - [Cucumber-JVM pour le BDD](https://cucumber.io/docs/installation/java/#maven)
-  - Webdriver pour les UI 
-    - [La lib officielle / Selenium (en Java)](https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java)
-  - Assertion 
-    - [Assert (JUnit API)](http://junit.sourceforge.net/javadoc/org/junit/Assert.html)
-  - Report 
-    - [Cucumber report](https://cucumber.io/docs/installation/java/#maven)
-  - Runtime 
-    - [JUnit](http://junit.sourceforge.net/javadoc/org/junit/Assert.html)
-  - Langage de Scripting
-      - JAVA
-- Architecture / Structure
-  - POM (Page Object Model)
-  - features
-  - stepDefinitions
-  - pageObjects
-  - reports
-  
-  
-  
+---
 
+## ▶️ Running Tests
+
+Run all tests with default browser (Chrome):
+
+```bash
+mvn test
+```
+
+Run tests with a specific browser:
+
+```bash
+mvn test -Dbrowser=firefox
+mvn test -Dbrowser=edge
+```
+
+---
+
+## 🧩 Example Usage
+
+### Feature File (`login.feature`)
+
+```gherkin
+Feature: Login functionality
+
+  Scenario: Successful login
+    Given I am on the login page
+    When I enter valid credentials
+    And I click on the login button
+    Then I should see the dashboard
+```
+
+### Step Definition (`LoginSteps.java`)
+
+```java
+@Given("I am on the login page")
+public void i_am_on_the_login_page() {
+    driver.get("https://example.com/login");
+    loginPage = new LoginPage(driver);
+}
+```
+
+---
+
+## 🏗️ Design Patterns Used
+
+### Page Object Model (POM)
+
+* Each page of the application has a dedicated Java class.
+* Encapsulates elements and actions to promote reusability.
+* Example: `LoginPage.java`
+
+### Factory Design Pattern
+
+* Centralized **BrowserFactory** to manage different WebDriver instances.
+* Makes it easy to switch browsers without modifying test logic.
+* Example:
+
+  ```java
+  WebDriver driver = BrowserFactory.getDriver("chrome");
+  ```
+
+---
+
+## 📊 Reporting
+
+JUnit generates test results automatically.
+You can also integrate with **Allure Reports** or **Extent Reports** for enhanced visualization.
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m "Add new feature"`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+```
+```
